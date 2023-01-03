@@ -1,16 +1,5 @@
 
-def tambah_aktivitas(nama,tanggal,kategori):
-    global jadwal
-
-    if nama.lower() in [nama_k.lower() for nama_k in jadwal]:
-        return 'Kegiatan sudah pernah diinput. Tidak boleh double claim!'
-    else:
-        jadwal[nama] = [tanggal,kategori,jadwal_poin_kegiatan[kategori]]
-        return 'Kegiatan berhasil ditambahkan.'
-
-
-
-jadwal = {}
+JADWAL = {}
 
 jadwal_poin_kegiatan = {
     'Prestasi':30,
@@ -21,9 +10,9 @@ jadwal_poin_kegiatan = {
 
 
 
-Tidakmau_keluar = True
+tidakbisa_keluar = True
 
-while Tidakmau_keluar:
+while tidakbisa_keluar:
     print('******* Kredit Keaktifan Mahasiswa ******\n(Student Activities Credit)')
 
     choices = ['Menambahkan Kegiatan', 'Menampilkan Jumlah Poin', 'Keluar']
@@ -33,29 +22,29 @@ while Tidakmau_keluar:
 
     print('-'*30)
 
-    memilih = choices[int(input('Silahkan Masukan Pilihan Anda: '))-1]
+    list = choices[int(input('Silahkan Masukan Pilihan Anda: '))-1]
 
-    if memilih == choices[0]:
+    if list == choices[0]:
         nama_aktivitas = input('Nama Kegiatan: ')
         tanggal_aktivitas = input('Tanggal Kegiatan: ')
         print('Pilihan Kategori Kegiatan:')
         for poin in jadwal_poin_kegiatan:
             print(f' - {poin}')
-        kategori_kegiatan = input('Masukan Kategori Kegiatan: ').title()
+        kategori_event = input('Masukan Kategori Kegiatan: ').title()
         print('')
-        print(tambah_aktivitas(nama_aktivitas,tanggal_aktivitas,kategori_kegiatan))
+        print(tambah_aktivitas(nama_aktivitas,tanggal_aktivitas,kategori_event))
         print('')
-    elif memilih == choices[1]:
+    elif list == choices[1]:
         print('')
         print('-'*30,end='')
         print('Nama Kegiatan\tTanggal\tKategori\tPoin')
-        jumlah_poin = 0
-        for i, jadwal_terdaftar in enumerate(jadwal,start=1):
-            print(f'{i}. {jadwal_terdaftar}',end='\t')
-            print(*jadwal[jadwal_terdaftar],sep='\t')
-            jumlah_poin += jadwal[jadwal_terdaftar][-1]
-        print(f'JUMLAH TOTAL POIN\t: {jumlah_poin}')
+        total_nilai = 0
+        for i, kegiatan_terdaftar in enumerate(JADWAL,start=1):
+            print(f'{i}. {kegiatan_terdaftar}',end='\t')
+            print(*JADWAL[kegiatan_terdaftar],sep='\t')
+            total_nilai += JADWAL[kegiatan_terdaftar][-1]
+        print(f'JUMLAH TOTAL POIN\t: {total_nilai}')
         print('')
     else:
         print('Sistem Berhenti...')
-        belum_keluar = False
+        tidakbisa_keluar = False
